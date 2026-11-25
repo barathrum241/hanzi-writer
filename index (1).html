@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#142b31">
+<title>Мои иероглифы · Hanzi</title>
+
+<style>
+:root{color-scheme:light;--ink:#142b31;--muted:#667980;--bg:#f4f6f3;--line:#d9e2dd;--accent:#127667;--accent2:#e7f5ee}*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}main{max-width:580px;margin:auto;padding:24px 18px max(35px,env(safe-area-inset-bottom))}.eyebrow{font-size:12px;letter-spacing:.16em;font-weight:750;color:var(--accent);text-transform:uppercase}h1{font-size:30px;line-height:1.1;margin:10px 0 7px;letter-spacing:-.04em}p{color:var(--muted);margin:0 0 18px;font-size:14px;line-height:1.5}.panel{border:1px solid #e4eae6;background:#fff;border-radius:22px;padding:17px;box-shadow:0 9px 30px #19362e08;margin:16px 0}.fieldlabel{font-size:13px;font-weight:750;display:block;margin-bottom:9px}.entry{display:flex;gap:9px}.entry input{min-width:0;flex:1;font-size:20px;border:1px solid var(--line);border-radius:12px;padding:12px 13px;outline:none;background:#fbfcfb}.entry input:focus{border-color:var(--accent)}button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:12px 14px;font-weight:700;touch-action:manipulation}.primary{background:var(--accent);color:white}.soft{background:#eaf1ee;color:var(--ink)}.outline{background:white;border:1px solid var(--line);color:var(--ink)}button:disabled{opacity:.45;cursor:default}.quick{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}.quick button{padding:8px 12px;font-size:17px;background:#f1f5f2}.panelhead{display:flex;justify-content:space-between;align-items:center;gap:10px}.panelhead strong{font-size:15px}.counter{color:var(--muted);font-size:13px}.paper{position:relative;margin:17px auto 13px;max-width:350px;width:100%;aspect-ratio:1;border:1px solid #d7e1dc;background:#fff;border-radius:14px;overflow:hidden;background-image:linear-gradient(to right,transparent calc(50% - .5px),#e1e8e3 50%,transparent calc(50% + .5px)),linear-gradient(to bottom,transparent calc(50% - .5px),#e1e8e3 50%,transparent calc(50% + .5px));touch-action:none;display:flex;align-items:center;justify-content:center}.paper:before,.paper:after{content:"";position:absolute;pointer-events:none;z-index:0}.paper:before{width:142%;height:1px;background:#edf0ec;transform:rotate(45deg)}.paper:after{width:142%;height:1px;background:#edf0ec;transform:rotate(-45deg)}#character-target{position:relative;z-index:1;touch-action:none}#character-target svg{touch-action:none;display:block}.status{text-align:center;min-height:22px;font-size:13px;color:var(--muted);margin:6px 0 14px}.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.actions button{font-size:14px}.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:13px}.nav button{flex:1}.bigchar{font-size:30px;font-weight:700}.opts{display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:14px;padding:10px 0}.opts+.opts{border-top:1px solid #edf0ed}.opts input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent)}select{font:inherit;background:#f4f7f4;border:1px solid var(--line);padding:8px;border-radius:9px;color:var(--ink)}.foot{font-size:12px;color:var(--muted);text-align:center;margin-top:24px}.foot a{color:var(--accent)}.error{color:#b34131}.success{color:#137c51}@media(max-width:370px){h1{font-size:27px}.actions button{padding:10px 8px;font-size:12px}} 
+
+.packcontrols{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:13px}.packcontrols select{width:100%;padding:11px}.packcontrols label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.packstats{font-size:13px;color:var(--muted);line-height:1.6;margin-top:13px}.progress-track{height:8px;border-radius:10px;background:#e5eee8;overflow:hidden;margin:8px 0}.progress-fill{height:100%;width:0;background:var(--accent);transition:width .2s}.packactions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.packactions button{font-size:13px;padding:10px}.tiny{font-size:12px;color:var(--muted);margin-top:10px}.tiny a{color:var(--accent)}.portion-banner{border-radius:13px;background:#eaf6f0;padding:12px;margin-top:12px;font-size:13px;line-height:1.6}.word-header{margin:9px 0;text-align:center}.word-title{font-size:26px;font-weight:750;letter-spacing:.03em}.word-subtitle{font-size:13px;color:var(--muted)}.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.stat-box{padding:10px;background:#f6f9f7;border-radius:12px}.stat-box strong{display:block;font-size:18px}.stat-box span{font-size:11px;color:var(--muted)}.backup-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.backup-actions button{font-size:13px}.backup-message{font-size:12px;line-height:1.5;margin-top:9px;color:var(--muted)}
+
+[hidden]{display:none!important}.catalog-picker{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.catalog-picker label{display:block;font-size:12px;color:var(--muted);margin-bottom:6px}.catalog-picker select{width:100%;min-width:0;padding:11px}.catalog-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}.catalog-head strong{font-size:16px}.catalog-controls{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.catalog-controls input,.catalog-controls select{width:100%;min-width:0;padding:10px;border-radius:10px;border:1px solid var(--line);font:inherit;background:#f9fbf9}.catalog-tabs{display:flex;gap:7px;margin-top:12px}.catalog-tabs button{flex:1;font-size:13px;padding:10px}.catalog-tabs .active{background:var(--accent);color:#fff}.catalog-summary{font-size:13px;color:var(--muted);line-height:1.6;margin:12px 0}.catalog-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.catalog-item{min-width:0;background:#f5f7f5;border:1px solid #e0e6e2;padding:9px 4px;border-radius:12px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}.catalog-item .glyph{font-size:27px;line-height:1.2;font-weight:650}.catalog-item small{font-size:10px;line-height:1.25;color:var(--muted);font-weight:500;overflow-wrap:anywhere}.catalog-item.complete{background:#e5f5ea;border-color:#97cfab}.catalog-item.partial{background:#fff5df;border-color:#e8c985}.catalog-item .label-complete{color:#147248}.catalog-item .label-partial{color:#94620b}.catalog-more{width:100%;margin-top:12px}.catalog-empty{font-size:13px;line-height:1.55;color:var(--muted);padding:15px;background:#f6f9f7;border-radius:12px}.catalog-legend{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.65}@media(min-width:460px){.catalog-grid{grid-template-columns:repeat(6,minmax(0,1fr))}}
+#review{box-sizing:border-box;width:min(calc(100% - 24px),480px);max-height:94dvh;border:1px solid var(--line);border-radius:22px;padding:20px;color:var(--ink)}
+#review::backdrop{background:var(--bg)}
+#review h2{margin:0;font-size:24px}
+#review-position{margin:12px 0 4px}
+#review-prompt{font-size:24px;font-weight:650}
+#review-paper>div{position:relative;touch-action:none}
+#review-paper svg{display:block}
+#review [hidden]{display:none}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+</head>
+<body><main>
+<div class="eyebrow">Hanzi practice</div><h1>Мои иероглифы <span aria-hidden="true">✍️</span></h1><p>Изучай порядок черт и тренируй написание китайских иероглифов прямо на экране телефона.</p>
+<button type="button" id="start-review" class="primary">Повторить пройденное</button>
+<section class="panel" id="packs-panel"><div class="panelhead"><strong>📚 Тренировка по HSK</strong><span class="counter">HSK 3.0 · программа 2025</span></div><div class="packcontrols"><div><label for="study-mode">Что тренируем</label><select id="study-mode"><option value="words">Слова HSK 3.0</option><option value="characters">Отдельные иероглифы</option></select></div><div><label for="portion">Размер порции</label><select id="portion"><option value="10">10 слов</option><option value="15" selected>15 слов</option><option value="30">30 слов</option></select></div><div><label for="pack">Пакет иероглифов</label><select id="pack"><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3">HSK 3</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option><option value="79">HSK 7–9</option><option value="56">HSK 5–6 вместе</option><option value="all">Все HSK 1–9</option></select></div><div id="kind-control"><label for="pack-kind">Тип иероглифов</label><select id="pack-kind"><option value="writing">Для написания (официальные требования)</option><option value="recognition">Для узнавания</option></select></div><div><label for="pack-order">Порядок</label><select id="pack-order"><option value="sequential">По списку</option><option value="random">Случайный</option><option value="unlearned">Ещё не пройденные</option></select></div></div><div class="packactions"><button id="start-pack" class="primary" type="button">Начать пак</button><button id="reset-progress" class="outline" type="button">Сбросить прогресс</button></div><div id="pack-message" class="packstats" aria-live="polite">Выбери уровень и нажми «Начать пак».</div><div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div><div id="pack-progress" class="tiny">Прогресс: —</div><div class="stats-grid"><div class="stat-box"><strong id="learned-stat">0 / —</strong><span>Пройдено в выбранном паке</span></div><div class="stat-box"><strong id="portion-stat">—</strong><span>Пройдено в текущей порции</span></div></div><div id="portion-status" class="portion-banner">Выбери пакет и порцию, затем нажми «Начать пак».</div><div class="backup-actions"><button type="button" class="soft" id="export-progress">↓ Экспорт прогресса</button><button type="button" class="outline" id="import-progress">↑ Импорт прогресса</button></div><input type="file" id="import-file" accept=".json,application/json" hidden><div class="backup-message" id="backup-message" aria-live="polite">Сохрани резервную копию в файл JSON, чтобы перенести результаты на другой телефон или восстановить их после очистки Chrome.</div><div class="tiny">Пакеты слов составлены по словарю HSK 3.0 (2025). Прогресс слов засчитывается только после правильного написания всех знаков слова. Режим отдельных иероглифов сохранён отдельно. Уровни содержат только новые слова или знаки своего уровня; данные загружаются при первом открытии.</div></section>
+<section class="panel" id="catalog-panel"><div class="catalog-head"><strong>🀄 Каталог HSK 3.0</strong><button type="button" class="soft" id="load-catalog" aria-expanded="false" aria-controls="catalog-content">Открыть список</button></div><div class="tiny">Выбирай уровень независимо от тренировки и смотри прогресс по каждому иероглифу или слову.</div><div id="catalog-content" hidden>
+<div class="catalog-picker"><div><label for="catalog-pack">Уровень словаря</label><select id="catalog-pack"><option value="1">HSK 1</option><option value="2">HSK 2</option><option value="3" selected>HSK 3</option><option value="4">HSK 4</option><option value="5">HSK 5</option><option value="6">HSK 6</option><option value="79">HSK 7–9</option><option value="56">HSK 5–6 вместе</option><option value="all">Все уровни</option></select></div><div><label for="catalog-kind">Иероглифы</label><select id="catalog-kind"><option value="writing">Для написания</option><option value="recognition">Для узнавания</option></select></div></div>
+<div class="catalog-tabs" id="catalog-tabs"><button type="button" id="tab-characters" class="active">Иероглифы</button><button type="button" id="tab-words">Слова</button></div><div class="catalog-controls"><input id="catalog-search" type="search" placeholder="Найти знак / слово" aria-label="Поиск по списку"><select id="catalog-filter" aria-label="Фильтр прогресса"><option value="all">Все</option><option value="done">✓ Пройденные</option><option value="partial">◐ В процессе</option><option value="new">○ Не пройденные</option></select></div><div class="catalog-summary" id="catalog-summary" aria-live="polite">Выбери уровень, чтобы увидеть его список.</div><div class="catalog-grid" id="catalog-grid"></div><button type="button" id="catalog-more" class="outline catalog-more" hidden>Показать ещё 100</button><div class="catalog-legend">✓ Пройден — написан правильно · ◐ В процессе — часть знаков слова написана · ○ Не пройден — ещё не завершён. Нажми на карточку для тренировки.</div></div></section>
+<section class="panel"><label class="fieldlabel" for="chars">Введи иероглиф или слово</label><form id="entryForm" class="entry"><input id="chars" autocomplete="off" spellcheck="false" value="你好" placeholder="Например, 学习中文" maxlength="60"><button class="primary" type="submit">Показать</button></form><div class="quick" aria-label="Примеры"><button type="button" data-sample="你好">你好</button><button type="button" data-sample="中国">中国</button><button type="button" data-sample="学习">学习</button><button type="button" data-sample="谢谢">谢谢</button><button type="button" data-sample="汉字">汉字</button></div></section>
+<section class="panel"><div class="panelhead"><strong id="title">Иероглиф</strong><span class="counter" id="counter">1 / 2</span></div><div id="word-header" class="word-header" hidden><div id="word-title" class="word-title"></div><div id="word-subtitle" class="word-subtitle"></div></div><div id="paper" class="paper"><div id="character-target"></div></div><div class="status" role="status" aria-live="polite" id="status">Нажми «Анимация» или «Тренировка»</div><div class="actions"><button class="primary" id="animate" type="button">▶ Анимация</button><button class="primary" id="quiz" type="button">✍ Тренировка</button><button class="soft" id="reset" type="button">↻ Сначала</button><button class="soft" id="show" type="button">◎ Показать знак</button></div><div class="nav"><button class="outline" id="prev" type="button">← Назад</button><span id="current" class="bigchar">你</span><button class="outline" id="next" type="button">Далее →</button></div></section>
+<section class="panel"><strong>Настройки</strong><div class="opts"><label for="outline">Показывать тень иероглифа</label><input id="outline" type="checkbox" checked></div><div class="tiny">Выключи, чтобы писать на пустой сетке. Скрытая тень не влияет на проверку порядка черт.</div><div class="opts"><label for="speed">Скорость анимации</label><select id="speed"><option value="0.6">Медленно</option><option value="1" selected>Обычно</option><option value="2">Быстро</option></select></div><div class="opts"><label for="hints">Подсказка после ошибок</label><select id="hints"><option value="1">1 ошибки</option><option value="3" selected>3 ошибок</option><option value="5">5 ошибок</option></select></div></section>
+<div class="foot">Данные HSK 3.0 (программа 2025): <a href="https://github.com/chelsea6502/hsk-2025-data" target="_blank" rel="noopener">hsk-2025-data</a>. Основано на <a href="https://hanziwriter.org/docs.html" target="_blank" rel="noopener">Hanzi Writer</a> · Для первого запуска и загрузки новых иероглифов нужен интернет.</div>
+</main>
+<dialog id="review" aria-labelledby="review-heading">
+  <div class="panelhead"><h2 id="review-heading">Повторение</h2><button class="outline" id="review-exit" type="button" autofocus>Выйти</button></div>
+  <p id="review-position"></p>
+  <div id="review-prompt"></div>
+  <div class="paper" id="review-paper"><div id="review-target"></div></div>
+  <div class="status" role="status" id="review-status"></div>
+  <div class="packactions">
+    <button class="soft" id="review-hint" type="button">Подсказка</button>
+    <button class="outline" id="review-audio" type="button">Послушать</button>
+    <button class="outline" id="review-retry" type="button" hidden>Повторить загрузку</button>
+  </div>
+</dialog>
+<script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id), c=$('chars'), status=$('status'), packMsg=$('pack-message');
+let chars=['你','好'],pos=0,writer=null,token=0,packRun=false,packId='',activePack=[],loadVersion=0;
+let wordRun=false,wordSession=null,wordIndex=0,wordPartsDone={};
+const WORD_DONE_KEY='hanzi-hsk3-words-done-v1',WORD_SESSION_KEY='hanzi-hsk3-word-session-v1';
+let wordsDone=read(WORD_DONE_KEY,{});
+let catalogData=[],catalogMode='',catalogPack='',catalogTab='characters',catalogLimit=100,catalogLoading=false,catalogRequest=0;
+function catalogChosen(){return {mode:catalogTab==='words'?'words':'characters',id:$('catalog-pack').value,kind:$('catalog-kind').value}}
+function catalogMatches(){const q=catalogChosen();return catalogMode===q.mode&&catalogPack===q.mode+'-'+q.kind+'-'+q.id}
+function catalogWordStatus(w){if(wordsDone[wordKey(w)])return 'done';const current=wordSession&&Array.isArray(wordSession.words)&&wordSession.words.find(x=>x.id===w.id);if(current&&Array.isArray(wordPartsDone[w.id])&&wordPartsDone[w.id].length)return 'partial';return 'new'}
+function catalogCharacterStatus(ch){if(done[ch])return 'done';// Backward compatibility: older word sessions did not separately record completed characters.
+if(catalogMode==='words'&&catalogData.some(w=>wordsDone[wordKey(w)]&&wordChars(w).includes(ch)))return 'done';
+if(wordRun&&wordSession&&wordSession.words[wordIndex]&&wordPartsDone[wordSession.words[wordIndex].id]){const w=wordSession.words[wordIndex];if(wordChars(w).some((c,i)=>c===ch&&wordPartsDone[w.id].includes(i)))return 'done'}return 'new'}
+function catalogItems(){if(catalogTab==='words'&&catalogMode==='words')return catalogData.map(w=>({text:w.word,pinyin:w.pinyin||'',status:catalogWordStatus(w),obj:w}));const chs=catalogMode==='words'?unique(catalogData.map(w=>w.word).join('')):catalogData;return chs.map(ch=>({text:ch,pinyin:'',status:catalogCharacterStatus(ch),obj:ch}))}
+function renderCatalog(reset=false){if(reset)catalogLimit=100;const tabs=$('catalog-tabs');$('tab-characters').classList.toggle('active',catalogTab==='characters');$('tab-words').classList.toggle('active',catalogTab==='words');const grid=$('catalog-grid');grid.replaceChildren();if(!catalogData.length){$('catalog-summary').textContent=catalogLoading?'Загружаем список HSK 3.0…':'Выбери пакет HSK и нажми «Открыть список». ';$('catalog-more').hidden=true;return}const all=catalogItems(),n=all.filter(x=>x.status==='done').length,percent=Math.round(100*n/all.length)||0;const q=$('catalog-search').value.trim().toLowerCase(),filter=$('catalog-filter').value;const filtered=all.filter(x=>(filter==='all'||x.status===filter)&&(!q||x.text.includes(q)||x.pinyin.toLowerCase().includes(q)));$('catalog-summary').textContent=`HSK ${catalogPack.split('-').at(-1)==='79'?'7–9':catalogPack.split('-').at(-1)} · ${catalogTab==='words'?'слов':'иероглифов'} пройдено ${n} из ${all.length} (${percent}%). Показано ${Math.min(catalogLimit,filtered.length)} из ${filtered.length}.`;const fragment=document.createDocumentFragment();for(const entry of filtered.slice(0,catalogLimit)){const b=document.createElement('button');b.type='button';b.className='catalog-item '+(entry.status==='done'?'complete':entry.status==='partial'?'partial':'');const glyph=document.createElement('span');glyph.className='glyph';glyph.textContent=entry.text;const sm=document.createElement('small');sm.className='label-'+(entry.status==='done'?'complete':entry.status==='partial'?'partial':'');sm.textContent=(entry.status==='done'?'✓ Пройден':entry.status==='partial'?'◐ В процессе':'○ Не пройден')+(entry.pinyin?' · '+entry.pinyin:'');b.append(glyph,sm);b.title='Открыть для тренировки';b.onclick=()=>{if(catalogTab==='words'&&catalogMode==='words'){const w=entry.obj;let sessionIndex=wordSession&&wordSession.modeKey==='words-'+catalogChosen().id?wordSession.words.findIndex(x=>x.id===w.id):-1;if(sessionIndex>=0)setSessionWord(sessionIndex);else{wordPartsDone={};wordSession={modeKey:'words-'+catalogChosen().id,pack:catalogChosen().id,words:[w],allWords:catalogData,portion:1};setSessionWord(0)}$('study-mode').value='words';$('pack').value=catalogChosen().id;syncKind();save('hanzi-hsk3-selected',{id:catalogChosen().id,kind:$('pack-kind').value,mode:'words',portion:Number($('portion').value)})}else{setList([entry.text],false);$('chars').value=entry.text}document.getElementById('paper').scrollIntoView({behavior:'smooth',block:'center'})};fragment.appendChild(b)}grid.appendChild(fragment);$('catalog-more').hidden=filtered.length<=catalogLimit;if(!filtered.length){const box=document.createElement('div');box.className='catalog-empty';box.textContent='По этому запросу ничего не найдено.';grid.appendChild(box)}}
+async function loadCatalog(){
+ const chosen=catalogChosen(),id=chosen.id,mode=chosen.mode,kind=chosen.kind,marker=mode+'-'+kind+'-'+id,request=++catalogRequest;
+ catalogLoading=true;catalogData=[];catalogPack=marker;catalogMode=mode;renderCatalog(true);
+ try{const data=mode==='words'?await loadWords(id):await loadPack(id,kind);
+  if(request!==catalogRequest||marker!==catalogChosen().mode+'-'+catalogChosen().kind+'-'+catalogChosen().id)return;
+  catalogData=data;catalogLoading=false;renderCatalog(true);
+ }catch(e){if(request===catalogRequest){catalogLoading=false;renderCatalog(true);$('catalog-summary').textContent='Не удалось загрузить список: '+(e.message||e)+'. Проверь интернет и повтори выбор уровня.'}}
+}
+function setCatalogOpen(open){
+ $('catalog-content').hidden=!open;
+ $('load-catalog').textContent=open?'Закрыть список':'Открыть список';
+ $('load-catalog').setAttribute('aria-expanded',String(open));
+ if(open&&(!catalogData.length||!catalogMatches())&&!catalogLoading)loadCatalog();
+ if(!open){++catalogRequest;catalogLoading=false;}
+}
+$('load-catalog').onclick=()=>setCatalogOpen($('catalog-content').hidden);
+$('tab-characters').onclick=()=>{if(catalogTab==='characters')return;catalogTab='characters';loadCatalog()};
+$('tab-words').onclick=()=>{if(catalogTab==='words')return;catalogTab='words';loadCatalog()};
+$('catalog-pack').onchange=()=>{ $('catalog-search').value='';loadCatalog()};
+$('catalog-kind').onchange=()=>{if(catalogTab==='characters')loadCatalog()};
+for(const id of ['catalog-search','catalog-filter'])$(id).addEventListener(id==='catalog-search'?'input':'change',()=>renderCatalog(true));
+$('catalog-more').onclick=()=>{catalogLimit+=100;renderCatalog()};
+
+const wordKey=w=>w.id;
+const wordChars=w=>valid(w.word);
+function syncKind(){const words=$('study-mode').value==='words';$('kind-control').style.display=words?'none':'';$('portion').disabled=!words}
+function setSessionWord(index){if(!wordSession||index<0||index>=wordSession.words.length)return;cancel();wordIndex=index;const w=wordSession.words[index];chars=wordChars(w);pos=0;wordRun=true;packRun=true;packId=wordSession.modeKey;activePack=wordSession.allWords;render();updateProgress();saveWordSession()}
+function saveWordSession(){if(wordSession)save(WORD_SESSION_KEY,{...wordSession,wordIndex,wordPartsDone})}
+function startWordSession(allWords,id,portion){let choices=allWords.filter(w=>!wordsDone[wordKey(w)]);if(!choices.length){packMsg.textContent='Все слова этого пака уже пройдены! Для повторения нажми «Повторить пройденное».';return}
+ const order=$('pack-order').value;if(order==='random'){for(let i=choices.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[choices[i],choices[j]]=[choices[j],choices[i]]}}
+ const selected=choices.slice(0,portion);wordPartsDone={};wordSession={modeKey:'words-'+id,pack:id,words:selected,allWords,portion};wordIndex=0;setSessionWord(0);packMsg.textContent=`Новая порция: ${selected.length} слов HSK ${id==='79'?'7–9':id}. Все уже завершённые слова исключены.`;save('hanzi-hsk3-selected',{id,kind:$('pack-kind').value,mode:'words',portion})}
+function wordNext(){if(!wordRun){if(pos<chars.length-1){cancel();pos++;render()}return}if(pos<chars.length-1){cancel();pos++;render();return}if(wordIndex<wordSession.words.length-1){setSessionWord(wordIndex+1)}else{updateProgress();say('Это последнее слово в порции. Закончи незавершённые слова или открой следующую порцию.','success')}}
+function wordPrev(){if(!wordRun){if(pos>0){cancel();pos--;render()}return}if(pos>0){cancel();pos--;render();return}if(wordIndex>0){setSessionWord(wordIndex-1);pos=chars.length-1;render()}}
+function completeWordCharacter(){if(!wordRun||!wordSession)return;const w=wordSession.words[wordIndex],key=wordKey(w);if(!Array.isArray(wordPartsDone[key]))wordPartsDone[key]=[];if(!wordPartsDone[key].includes(pos))wordPartsDone[key].push(pos);if(wordPartsDone[key].length>=wordChars(w).length){wordsDone[key]=true;save(WORD_DONE_KEY,wordsDone);say(`Слово ${w.word} завершено! 🎉`,'success')}else say(`Верно! В слове ${w.word} готово ${wordPartsDone[key].length} из ${wordChars(w).length} знаков. Нажми «Далее».`,'success');saveWordSession();updateProgress()}
+
+const valid=s=>Array.from(s||'').filter(ch=>/\p{Script=Han}/u.test(ch)).slice(0,6000);
+const unique=s=>Array.from(new Set(valid(s)));
+
+function say(t,kind=''){status.textContent=t;status.className='status '+kind}
+function size(){return Math.min(346,Math.max(220,Math.floor($('paper').clientWidth-12)))}
+function read(key,fallback){try{return JSON.parse(localStorage.getItem(key))??fallback}catch(e){return fallback}}
+function save(key,val){try{localStorage.setItem(key,JSON.stringify(val))}catch(e){}}
+let done=read('hanzi-hsk3-done-v1',{});
+const keysFor=id=>id==='56'?['5','6']:id==='79'?['7','8','9']:id==='all'?['1','2','3','4','5','6','7','8','9']:[id];
+const currentKey=()=>`${$('pack-kind').value}-${$('pack').value}`;
+const totalDone=(id,items)=>items.filter(ch=>done[ch]===true).length;
+function updateProgress(){if(!$('catalog-content').hidden&&catalogData.length&&catalogMatches())renderCatalog();if($('study-mode').value==='words'){
+ const id=$('pack').value,key='words-'+id,cache=read('hanzi-hsk3-'+key,null),data=(wordSession&&wordSession.modeKey===key)?wordSession.allWords:(cache||[]),n=data.filter(w=>wordsDone[wordKey(w)]).length;
+ const percent=data.length?Math.round(n/data.length*100):0;
+ $('pack-progress').textContent=data.length?`Пройдено ${n} из ${data.length} слов — ${percent}%`:'Нажми «Начать пак», чтобы загрузить словарь и посчитать прогресс';
+ $('progress-fill').style.width=percent+'%';$('learned-stat').textContent=data.length?`${n} / ${data.length}`:'0 / —';
+ if(wordSession&&wordSession.modeKey===key){const completed=wordSession.words.filter(w=>wordsDone[wordKey(w)]).length;
+ $('portion-stat').textContent=`${completed} / ${wordSession.words.length}`;
+ $('portion-status').textContent=`Порция: ${completed}/${wordSession.words.length} (${Math.round(completed/wordSession.words.length*100)}%). Слово ${wordIndex+1} из ${wordSession.words.length}. ${completed===wordSession.words.length?'Всё готово! Нажми «Начать пак», чтобы получить следующую порцию.':'После выполнения можно вернуться к незавершённым словам кнопкой «Назад».'}`;
+ }else{$('portion-stat').textContent='—';$('portion-status').textContent='Выбери размер порции и начни тренировку.'}return}
+ const sel=currentKey();const cache=read('hanzi-hsk3-'+sel,null);const data=packRun&&sel===packId?activePack:cache||[];const n=totalDone(sel,data);$('pack-progress').textContent=data.length?`Освоено: ${n} из ${data.length} иероглифов (${Math.round(n/data.length*100)}%)`:'Открой пакет, чтобы увидеть прогресс';$('progress-fill').style.width=(data.length?n/data.length*100:0)+'%';$('learned-stat').textContent=data.length?`${n} / ${data.length}`:'0 / —';$('portion-stat').textContent='—';$('portion-status').textContent='В режиме отдельных иероглифов прогресс считается по знакам.'}
+function render(){const id=++token,character=chars[pos];$('counter').textContent=wordRun&&wordSession?`Слово ${wordIndex+1}/${wordSession.words.length} · знак ${pos+1}/${chars.length}`:`${pos+1} / ${chars.length}`;const wh=$('word-header');wh.hidden=!wordRun;if(wordRun&&wordSession){const w=wordSession.words[wordIndex];$('word-title').textContent=w.word;$('word-subtitle').textContent=(w.pinyin||'')+(wordsDone[wordKey(w)]?' · ✓ пройдено':' · напиши все знаки')} $('current').textContent=character;$('title').textContent='Иероглиф '+character;$('prev').disabled=pos===0&&(!wordRun||wordIndex===0);$('next').disabled=pos===chars.length-1&&(!wordRun||!wordSession||wordIndex===wordSession.words.length-1);$('character-target').replaceChildren();writer=null;if(!window.HanziWriter){say('Не загрузилась библиотека. Проверь интернет и обнови страницу.','error');return}const px=size();say('Загружаем иероглиф…');try{writer=HanziWriter.create('character-target',character,{width:px,height:px,padding:12,showOutline:$('outline').checked,showCharacter:true,strokeColor:'#173e40',outlineColor:'#cbd8d1',drawingColor:'#087f6f',drawingWidth:28,strokeAnimationSpeed:Number($('speed').value),showHintAfterMisses:Number($('hints').value),onLoadCharDataSuccess:()=>{if(id===token)say('Готово! Выбери анимацию или тренировку.')},onLoadCharDataError:()=>{if(id===token)say('Не удалось загрузить этот иероглиф. Проверь интернет.','error')}})}catch(e){say('Ошибка запуска. Открой файл в Chrome с интернетом.','error')}}
+function cancel(){if(writer){try{writer.cancelQuiz();writer.pauseAnimation()}catch(e){}}}
+function setList(items,isPack=false,key=''){wordRun=false;wordSession=null;save(WORD_SESSION_KEY,null);cancel();chars=items;pos=0;packRun=isPack;packId=key;activePack=isPack?items.slice():[];if(!isPack)save('hanzi-last',items.join(''));render();updateProgress()}
+function list(){const arr=valid(c.value).slice(0,60);if(!arr.length){say('Введи хотя бы один китайский иероглиф.','error');return}setList(arr)}
+// Source: 2025 HSK 3.0 character requirements. TSV is intentionally loaded live,
+// rather than silently falling back to the obsolete HSK 2.0 lists.
+const hsk3Sources={writing:'hanzi_writing.tsv',recognition:'hanzi_recognition.tsv'};
+async function loadSource(kind){
+ const key='hanzi-hsk3-source-'+kind;
+ const existing=read(key,null);
+ if(existing&&typeof existing==='object'&&Object.keys(existing).length>=6)return existing;
+ const file=hsk3Sources[kind];
+ const urls=[`https://raw.githubusercontent.com/chelsea6502/hsk-2025-data/master/${file}`,
+ `https://cdn.jsdelivr.net/gh/chelsea6502/hsk-2025-data@master/${file}`];
+ let lastError;
+ for(const url of urls){
+  const ctl=new AbortController(),timeout=setTimeout(()=>ctl.abort(),13000);
+  try{
+   const response=await fetch(url,{signal:ctl.signal});
+   if(!response.ok)throw Error('HTTP '+response.status);
+   const tsv=await response.text();
+   const lines=tsv.replace(/^\uFEFF/,'').trim().split(/\r?\n/);
+   const header=lines.shift().split('\t').map(x=>x.trim());
+   const levIdx=header.findIndex(x=>/examLevelId|level/i.test(x));
+   const hanIdx=header.findIndex(x=>/word|hanzi|character/i.test(x));
+   if(levIdx<0||hanIdx<0)throw Error('Неизвестный формат списка');
+   const groups={};
+   for(const line of lines){
+    const cols=line.split('\t'), raw=(cols[levIdx]||'').trim(),han=(cols[hanIdx]||'').trim();
+    const m=raw.match(/(?:^|[^0-9])([1-9])(?:$|[^0-9])/);
+    if(!m||!han)continue;
+    const level=Number(m[1]);
+    if(!groups[level])groups[level]=[];
+    groups[level].push(...valid(han));
+   }
+   for(const level of Object.keys(groups))groups[level]=unique(groups[level].join(''));
+   const count=Object.values(groups).reduce((n,a)=>n+a.length,0);
+   if(count<(kind==='writing'?1000:2800))throw Error('Неполный список ('+count+')');
+   save(key,groups);return groups;
+  }catch(e){lastError=e}finally{clearTimeout(timeout)}
+ }
+ throw lastError||Error('Ошибка сети');
+}
+async function loadPack(id,kind){
+ const groups=await loadSource(kind);
+ const chosen=keysFor(id);
+ const data=unique(chosen.flatMap(x=>groups[x]||[]).join(''));
+ if(!data.length&&!(kind==='writing'&&id==='1'))throw Error('В выбранном уровне нет доступных иероглифов');
+ save('hanzi-hsk3-'+kind+'-'+id,data);
+ return data;
+}
+async function loadWords(id){
+ const cacheKey='hanzi-hsk3-words-source-v1';let groups=read(cacheKey,null);
+ if(!groups||!groups['3']||groups['3'].length<400){
+  const urls=['https://raw.githubusercontent.com/chelsea6502/hsk-2025-data/master/vocabulary.tsv','https://cdn.jsdelivr.net/gh/chelsea6502/hsk-2025-data@master/vocabulary.tsv'];let err;
+  for(const url of urls){const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),18000);try{const res=await fetch(url,{signal:ctl.signal});if(!res.ok)throw Error('HTTP '+res.status);const text=await res.text(),lines=text.replace(/^\uFEFF/,'').trim().split(/\r?\n/),headers=lines.shift().split('\t');const wi=headers.indexOf('word'),pi=headers.indexOf('pinyin'),si=headers.indexOf('sort');if(wi<0||pi<0||si<0)throw Error('Незнакомый формат словаря');groups={};for(const row of lines){const cols=row.split('\t'),idNum=Number(cols[si]);const w=(cols[wi]||'').replace(/[0-9]+$/,'').trim();if(!w||!valid(w).length||!Number.isInteger(idNum)||idNum<1||idNum>11000)continue;const level=idNum<=300?'1':idNum<=500?'2':idNum<=1000?'3':idNum<=2000?'4':idNum<=3600?'5':idNum<=5400?'6':'79';groups[level]??=[];groups[level].push({id:level+':'+idNum,word:w,pinyin:(cols[pi]||'').trim()})}
+  if(!groups['3']||groups['3'].length<400)throw Error('Список HSK 3 неполный');save(cacheKey,groups);err=null;break}catch(e){err=e}finally{clearTimeout(timer)}}if(err)throw err;
+ }
+ const keys=id==='56'?['5','6']:id==='all'?['1','2','3','4','5','6','79']:[id],data=keys.flatMap(k=>groups[k]||[]);if(!data.length)throw Error('Нет слов для выбранного уровня');save('hanzi-hsk3-words-'+id,data);return data;
+}
+function arrange(data){let items=data.slice();const order=$('pack-order').value;if(order==='unlearned'){items=items.filter(ch=>!done[ch]);if(items.length===0){packMsg.textContent='Все знаки выбранного пака уже отмечены как пройденные. Сбрось прогресс или выбери другой порядок.';return []}}if(order==='random'||order==='unlearned'){for(let i=items.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[items[i],items[j]]=[items[j],items[i]]}}return items}
+$('start-pack').onclick=async()=>{
+ const id=$('pack').value,kind=$('pack-kind').value,req=++loadVersion,btn=$('start-pack');
+ btn.disabled=true;packMsg.textContent='Загружаем актуальный список HSK 3.0…';
+ try{
+  if($('study-mode').value==='words'){const data=await loadWords(id);if(req!==loadVersion)return;startWordSession(data,id,Number($('portion').value));return}
+  if(kind==='writing'&&id==='1'){
+   packMsg.textContent='В HSK 3.0 для уровня 1 нет обязательных иероглифов для письма. Выбери «Для узнавания» или уровень HSK 2+';
+   return;
+  }
+  const data=await loadPack(id,kind);
+  if(req!==loadVersion)return;
+  const items=arrange(data);if(!items.length)return;
+  setList(items,true,kind+'-'+id);
+  packMsg.textContent=`HSK 3.0 · ${kind==='writing'?'для написания':'для узнавания'} · ${items.length} разных иероглифов. После успешного написания знак будет отмечен как пройденный.`;
+  save('hanzi-hsk3-selected',{id,kind});
+ }catch(e){packMsg.textContent='Не удалось загрузить официальный список HSK 3.0: '+(e.message||e)+'. Проверь интернет и повтори.'}
+ finally{if(req===loadVersion)btn.disabled=false;updateProgress()}
+};
+for(const fld of ['pack','pack-kind','study-mode','portion'])$(fld).onchange=()=>{syncKind();packMsg.textContent='Нажми «Начать пак», чтобы открыть выбранный список HSK 3.0.';updateProgress()};
+$('reset-progress').onclick=()=>{const wordMode=$('study-mode').value==='words';if(!confirm(wordMode?'Сбросить ВСЕ пройденные слова во ВСЕХ уровнях HSK 3.0?':'Сбросить отметки о пройденных отдельных иероглифах?'))return;if(wordMode){wordsDone={};wordPartsDone={};save(WORD_DONE_KEY,wordsDone);saveWordSession()}else{done={};save('hanzi-hsk3-done-v1',done)}updateProgress();packMsg.textContent='Прогресс очищен.'};
+// Backup intentionally contains only app-specific keys, never other site data.
+const BACKUP_KEYS=['hanzi-hsk3-words-done-v1','hanzi-hsk3-done-v1','hanzi-hsk3-word-session-v1','hanzi-hsk3-selected','hanzi-last','hanzi-show-shadow-v1'];
+function isBackupKey(k){return BACKUP_KEYS.includes(k)||/^hanzi-hsk3-(words-|source-|writing-|recognition-)/.test(k)}
+function backupSnapshot(){const records={};for(let i=0;i<localStorage.length;i++){const key=localStorage.key(i);if(!isBackupKey(key))continue;const raw=localStorage.getItem(key);if(raw===null)continue;try{records[key]=JSON.parse(raw)}catch(e){}}return {format:'hanzi-practice-backup',version:1,exportedAt:new Date().toISOString(),records}}
+$('export-progress').onclick=()=>{try{const backup=backupSnapshot(),blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='hanzi-progress-'+new Date().toISOString().slice(0,10)+'.json';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);$('backup-message').textContent='Резервная копия загружена. Сохрани JSON-файл в надёжном месте (например, на Google Диске).'}catch(e){$('backup-message').textContent='Не удалось сохранить резервную копию: '+(e.message||e)}};
+$('import-progress').onclick=()=>$('import-file').click();
+$('import-file').onchange=async(e)=>{const file=e.target.files&&e.target.files[0];if(!file)return;const message=$('backup-message');try{if(file.size>8*1024*1024)throw Error('Файл слишком большой (более 8 МБ)');const data=JSON.parse(await file.text());if(!data||data.format!=='hanzi-practice-backup'||data.version!==1||!data.records||typeof data.records!=='object'||Array.isArray(data.records))throw Error('Это не файл резервной копии Hanzi Writer');const records=Object.entries(data.records).filter(([key])=>isBackupKey(key));if(!records.length)throw Error('В файле нет данных прогресса');if(!confirm('Импорт заменит текущий прогресс и настройки данными из резервной копии. Продолжить?'))return;
+// Validate everything before touching storage. Remove app-owned keys not in snapshot.
+const serialized=records.map(([key,val])=>[key,JSON.stringify(val)]);for(const [key,val] of serialized){if(val===undefined)throw Error('Некорректное значение: '+key)}
+const old=backupSnapshot().records;try{Object.keys(old).forEach(k=>localStorage.removeItem(k));for(const [key,val] of serialized)localStorage.setItem(key,val)}catch(err){Object.keys(backupSnapshot().records).forEach(k=>localStorage.removeItem(k));for(const [k,v] of Object.entries(old))localStorage.setItem(k,JSON.stringify(v));throw err}
+message.textContent='Прогресс импортирован. Перезагружаем приложение…';location.reload();
+}catch(err){message.textContent='Импорт не выполнен: '+(err.message||err)}finally{e.target.value=''}};
+$('entryForm').addEventListener('submit',e=>{e.preventDefault();c.blur();list()});document.querySelectorAll('[data-sample]').forEach(b=>b.addEventListener('click',()=>{c.value=b.dataset.sample;list()}));
+$('prev').onclick=wordPrev;$('next').onclick=wordNext;
+$('animate').onclick=()=>{if(!writer)return;cancel();render();if(writer){const current=token;say('Смотри порядок черт…');writer.animateCharacter({onComplete:()=>{if(current===token)say('Готово! Попробуй написать самостоятельно.','success')}})}};
+$('quiz').onclick=()=>{if(!writer)return;cancel();render();if(!writer)return;const current=token;writer.hideCharacter({duration:0});if(!$('outline').checked)writer.hideOutline({duration:0});say('Пиши пальцем прямо в квадрате.');writer.quiz({showHintAfterMisses:Number($('hints').value),onMistake:d=>{if(current===token)say(`Попробуй ещё раз. Ошибок: ${d.totalMistakes}`)},onCorrectStroke:d=>{if(current===token)say(`Верно! Осталось черт: ${d.strokesRemaining}`,'success')},onComplete:d=>{if(current!==token)return;done[chars[pos]]=true;save('hanzi-hsk3-done-v1',done);if(wordRun){completeWordCharacter()}else{updateProgress();say(`Отлично! Иероглиф написан. Ошибок: ${d.totalMistakes} 🎉`,'success')}}})};
+$('reset').onclick=()=>{cancel();render()};$('show').onclick=()=>{if(writer){cancel();writer.showOutline();writer.showCharacter();say('Иероглиф показан полностью.')}};
+$('speed').addEventListener('change',()=>{cancel();render()});$('outline').addEventListener('change',()=>{save('hanzi-show-shadow-v1',$('outline').checked);if(writer){if($('outline').checked)writer.showOutline({duration:0});else writer.hideOutline({duration:0})}say($('outline').checked?'Тень включена.':'Тень выключена — тренируйся без контура.')});
+try{$('outline').checked=read('hanzi-show-shadow-v1',true)!==false;let saved=read('hanzi-last',null);if(saved&&valid(saved).length)c.value=saved;const chosen=read('hanzi-hsk3-selected',{id:'3',kind:'writing'});if(['1','2','3','4','5','6','79','56','all'].includes(chosen.id))$('pack').value=chosen.id;if(['writing','recognition'].includes(chosen.kind))$('pack-kind').value=chosen.kind;if(['words','characters'].includes(chosen.mode))$('study-mode').value=chosen.mode;if([10,15,30].includes(chosen.portion))$('portion').value=chosen.portion}catch(e){}syncKind();$('catalog-pack').value=$('pack').value;$('catalog-kind').value=$('pack-kind').value;const oldSession=read(WORD_SESSION_KEY,null);if(oldSession&&Array.isArray(oldSession.words)&&Array.isArray(oldSession.allWords)&&oldSession.modeKey==='words-'+$('pack').value&&$('study-mode').value==='words'&&oldSession.words.length){wordSession=oldSession;wordPartsDone=oldSession.wordPartsDone||{};wordIndex=Math.max(0,Math.min(oldSession.words.length-1,oldSession.wordIndex||0));wordRun=true;chars=wordChars(oldSession.words[wordIndex]);pos=0;packRun=true;packId=oldSession.modeKey;activePack=oldSession.allWords;packMsg.textContent='Восстановлена последняя порция. Можешь продолжить тренировку.'}else{chars=valid(c.value).slice(0,60)}render();updateProgress();
+const review = $('review');
+const reviewStatus = $('review-status');
+let reviewPool = [], reviewDeck = [], reviewItem = null, reviewPos = 0;
+let reviewWriter = null, reviewVersion = 0;
+
+function reviewCards(extraWords = []) {
+  const cards = new Map();
+  for (const [ch, learned] of Object.entries(done)) {
+    if (learned && valid(ch).join('') === ch && Array.from(ch).length === 1)
+      cards.set(ch, {text: ch, pinyin: ''});
+  }
+  const knownIds = new Set();
+  function addWords(words) {
+    if (!Array.isArray(words)) return;
+    for (const w of words) {
+      if (!w || typeof w.word !== 'string') continue;
+      const text = wordChars(w).join('');
+      if (!text) continue;
+      if (wordsDone[w.id]) knownIds.add(w.id);
+      if (wordsDone[w.id] || cards.has(text)) {
+        const pinyin = typeof w.pinyin === 'string' && !valid(w.pinyin).length ? w.pinyin : '';
+        cards.set(text, {text, pinyin: cards.get(text)?.pinyin || pinyin});
+      }
+    }
+  }
+  addWords(wordSession?.allWords);
+  for (const id of ['1','2','3','4','5','6','56','79','all']) addWords(read('hanzi-hsk3-words-'+id, []));
+  for (const words of Object.values(read('hanzi-hsk3-words-source-v1', {}))) addWords(words);
+  addWords(extraWords);
+  return {cards: Array.from(cards.values()), missing: Object.keys(wordsDone).some(id => wordsDone[id] && !knownIds.has(id))};
+}
+function stopReviewWriter() {
+  reviewVersion++;
+  reviewWriter?.cancelQuiz();
+}
+function nextReviewCard() {
+  if (!reviewDeck.length) {
+    reviewDeck = reviewPool.slice();
+    for (let i = reviewDeck.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [reviewDeck[i], reviewDeck[j]] = [reviewDeck[j], reviewDeck[i]];
+    }
+    const last = reviewDeck.length - 1;
+    if (last > 0 && reviewDeck[last] === reviewItem)
+      [reviewDeck[0], reviewDeck[last]] = [reviewDeck[last], reviewDeck[0]];
+  }
+  reviewItem = reviewDeck.pop();
+  reviewPos = 0;
+  drawReview();
+}
+async function drawReview() {
+  stopReviewWriter();
+  const version = reviewVersion, letters = Array.from(reviewItem.text);
+  const live = () => review.open && version === reviewVersion;
+  $('review-position').textContent = 'Знак ' + (reviewPos + 1) + ' из ' + letters.length;
+  $('review-prompt').textContent = reviewItem.pinyin;
+  const paper = $('review-paper');
+  paper.hidden = false;
+  const px = Math.min(346, paper.clientWidth - 6);
+  $('review-hint').hidden = true;
+  $('review-retry').hidden = true;
+  $('review-audio').hidden = !window.speechSynthesis;
+  reviewStatus.textContent = 'Загрузка…';
+  function failed() {
+    if (!live()) return;
+    reviewStatus.textContent = 'Не удалось загрузить данные для письма. Проверь соединение.';
+    $('review-retry').hidden = false;
+  }
+  try {
+    if (!reviewWriter) {
+      reviewWriter = new HanziWriter($('review-target'), {
+        width:px, height:px, padding:12, showCharacter:false, showOutline:false,
+        drawingColor:'#087f6f', strokeColor:'#173e40', showHintAfterMisses:false
+      });
+    } else {
+      reviewWriter.updateDimensions({width:px, height:px});
+    }
+    await reviewWriter.setCharacter(letters[reviewPos]);
+    if (!live()) return;
+    reviewStatus.textContent = 'Напиши знак по памяти.';
+    $('review-hint').hidden = false;
+    reviewWriter.quiz({
+      showHintAfterMisses:false, highlightOnComplete:false,
+      onMistake:() => { if (live()) reviewStatus.textContent = 'Попробуй эту черту ещё раз.'; },
+      onCorrectStroke:() => { if (live()) reviewStatus.textContent = 'Верно, продолжай.'; },
+      onComplete:() => {
+        if (!live()) return;
+        queueMicrotask(() => {
+          if (!live()) return;
+          if (++reviewPos < letters.length) drawReview();
+          else nextReviewCard();
+        });
+      }
+    });
+  } catch { failed(); }
+}
+async function startReview() {
+  stopReviewWriter();
+  const version = reviewVersion;
+  reviewItem = null;
+  reviewDeck = [];
+  if (!review.open) review.showModal();
+  for (const id of ['review-paper','review-hint','review-audio','review-retry']) $(id).hidden = true;
+  $('review-position').textContent = $('review-prompt').textContent = '';
+  let result = reviewCards();
+  if (result.missing) {
+    reviewStatus.textContent = 'Загружаем словарь для пройденных слов…';
+    try {
+      const words = await loadWords('all');
+      if (!review.open || version !== reviewVersion) return;
+      result = reviewCards(words);
+    } catch {
+      if (!review.open || version !== reviewVersion) return;
+      reviewStatus.textContent = 'Для восстановления списка слов нужен словарь. Проверь соединение.';
+      $('review-retry').hidden = false;
+      return;
+    }
+  }
+  reviewPool = result.cards;
+  if (reviewPool.length) nextReviewCard();
+  else reviewStatus.textContent = 'Пока нечего повторять. Пройди слово или иероглиф в тренировке либо импортируй свой прогресс.';
+}
+$('start-review').onclick = startReview;
+$('review-retry').onclick = () => reviewItem ? drawReview() : startReview();
+$('review-hint').onclick = () => {
+  if (!reviewWriter) return;
+  $('review-prompt').textContent = [reviewItem.pinyin, Array.from(reviewItem.text)[reviewPos]].filter(Boolean).join(' · ');
+  $('review-hint').hidden = true;
+};
+$('review-audio').onclick = () => {
+  const sound = new SpeechSynthesisUtterance(reviewItem.text);
+  sound.lang = 'zh-CN';
+  const version = reviewVersion;
+  sound.onerror = () => { if (version === reviewVersion) reviewStatus.textContent = 'Озвучка недоступна. Можно открыть подсказку.'; };
+  speechSynthesis.cancel();
+  speechSynthesis.speak(sound);
+};
+$('review-exit').onclick = () => review.close();
+review.addEventListener('close', () => {
+  stopReviewWriter();
+  window.speechSynthesis?.cancel();
+});
+if('serviceWorker' in navigator && location.protocol==='https:')navigator.serviceWorker.register('./sw.js').catch(()=>{});
+})();
+</script></body></html>
